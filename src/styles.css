@@ -6,6 +6,10 @@
   html, body, #root{
     @apply h-screen overflow-y-hidden
   }
+  
+  html{
+    font-family: 'Courier New', Courier, monospace;
+  }
 
   /* [data-tauri-drag-region] {
     @apply fixed top-0 left-0

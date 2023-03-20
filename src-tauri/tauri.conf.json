@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "hxv",
-    "version": "1.0.0"
+    "version": "0.0.0-dev"
   },
   "tauri": {
     "allowlist": {
@@ -43,6 +43,8 @@
         "title": "hxv",
         "width": 800,
         "height": 600,
+        "minHeight": 600,
+        "minWidth": 800,
         "decorations": false
       }
     ]

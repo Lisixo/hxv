@@ -1,7 +1,8 @@
 import { TitlebarContainer } from "./window/container";
 import { TitlebarButton } from "./window/button";
-import { IconMinus, IconWindowMaximize, IconWindowMinimize, IconX } from "@tabler/icons-react";
+import { IconAppWindow, IconMinus, IconWindowMaximize, IconWindowMinimize, IconX } from "@tabler/icons-react";
 import { appWindow } from "@tauri-apps/api/window";
+import * as app from '@tauri-apps/api/app'
 import { useEffect, useState } from "react";
 
 const buttonStyles: React.CSSProperties = {
@@ -11,6 +12,7 @@ const buttonStyles: React.CSSProperties = {
 
 export function Titlebar() {
   const [isMaximized, setIsMaximized] = useState(false)
+  const [version, setVersion] = useState<string | null>(null)
 
   async function windowState(){
     const _isMaximized = await appWindow.isMaximized()
@@ -18,18 +20,26 @@ export function Titlebar() {
     return _isMaximized
   }
 
+  async function getVersion() {
+    setVersion(await app.getVersion())
+  }
+
   useEffect(() => {
+    getVersion()
     const checkLoop = setInterval(windowState, 100)
 
     return () => clearInterval(checkLoop)
   })
 
   return <>
-    <TitlebarContainer dragRegion style={{width: '100%'}} className="border-b-2 border-custom-700">
-      <div>
-
+    <TitlebarContainer dragRegion style={{width: '100%', padding: '0px 0.5rem'}} className="border-b-2 border-custom-700">
+      {/* Icon and title */}
+      <div className="flex gap-2 items-center">
+        <IconAppWindow />
+        {`HxV`} {`(${version})`}
       </div>
-      <TitlebarContainer dragRegion style={{padding: '0px 0.5rem'}} className="border-b-[1px] border-custom-700">
+      {/* Window Buttons */}
+      <TitlebarContainer dragRegion className="border-b-[1px] border-custom-700">
         <TitlebarButton
           icon={<IconMinus size={20} />}
           style={buttonStyles}
