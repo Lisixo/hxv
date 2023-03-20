@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  html, body, #root{
+    @apply h-screen overflow-y-hidden
+  }
+
+  /* [data-tauri-drag-region] {
+    @apply fixed top-0 left-0
+  } */
+}
